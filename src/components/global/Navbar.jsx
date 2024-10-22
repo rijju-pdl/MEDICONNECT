@@ -63,21 +63,21 @@ export default function Navbar() {
       },
     },
     {
-      path: "/doctors",
+      path: "/doctor",
       itemName: "Doctors",
       clickFn: () => {
         closeMobileMenu();
       },
     },
     {
-      path: "/hospitals",
+      path: "/Hospital",
       itemName: "Hospitals",
       clickFn: () => {
         closeMobileMenu();
       },
     },
     {
-      path: "/contact",
+      path: "/Contact",
       itemName: "Contact",
       clickFn: () => {
         closeMobileMenu();

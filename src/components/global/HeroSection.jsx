@@ -17,20 +17,20 @@ export default function HeroSection() {
           <Button  className="mt-4" onClickFn={() => console.log("Button clicked")} > Get Started </Button>
 
 {/*Grid */}
-          <div class = "w-full grid  grid-cols-4  h-full ">
-            <div class = "flex items-center gap-2 bg-white bg-opacity-50 p-2 ">
+          <div className = "w-full grid  grid-cols-4  h-full ">
+            <div className = "flex items-center gap-2 bg-white bg-opacity-50 p-2 ">
               <FaHospitalUser className = "text-3xl text-primary" />
               <p className = "text-lg font-semibold text-primary"> Find Doctors </p>
             </div>
-            <div class = "flex items-center gap-2 bg-white bg-opacity-50 p-2 ">
+            <div className= "flex items-center gap-2 bg-white bg-opacity-50 p-2 ">
               <GiHospitalCross className = "text-3xl text-primary" />
               <p className = "text-lg font-semibold text-primary"> Find Hospitals </p>
             </div>
-            <div class = "flex items-center gap-2 bg-white bg-opacity-50 p-2 ">
+            <div className = "flex items-center gap-2 bg-white bg-opacity-50 p-2 ">
               <TbUserSearch className = "text-3xl text-primary" />
               <p className = "text-lg font-semibold text-primary"> Find Labs </p>
             </div>
-            <div class = "flex items-center gap-2 bg-white bg-opacity-50 p-2 ">
+            <div className = "flex items-center gap-2 bg-white bg-opacity-50 p-2 ">
               <FaUserDoctor className = "text-3xl text-primary" />
               <p className = "text-lg font-semibold text-primary"> Find Pharmacies </p>
             </div>
