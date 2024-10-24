@@ -2,7 +2,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux"; // Use standard
 import FilterSelect from "../filter/FilterSelect";
-import FilterByOrderPlusStatistic from "./FilterByOrderPlusStatistic";
+//import FilterByOrderPlusStatistic from "./FilterByOrderPlusStatistic";
 
 import {
   updateCityChosen,
@@ -26,151 +26,102 @@ export default function DoctorFilter({
   currentlyViewedDoctorsLastIndex,
   currentlyViewedDoctorsStartIndex,
 }) {
-  const dispatch = useDispatch(); // Use useDispatch from react-redux
-  const {
-    cityChosen,
-    specialityChosen,
+
+  const dispatch = useDispatch();
+  const {filteredDoctors,
     hospitalChosen,
-    sort,
-    order,
-    filteredDoctors,
-  } = useSelector((state) => state.doctorFilter); // Use useSelector to get the state
+  specialityChosen , cityChosen} = useSelector((store) => store.doctorFilter);
+  
+  
+  const filterSpeciality = useCallback((val)=>{
+    dispatch(updateSpecialityChosen(val));
 
-  const [filterDoctorOptions, setFilterDoctorOptions] = useState({});
-  const sortOptions = ["Name", "Speciality", "City"];
-
-  const filterCity = useCallback(
-    (val) => {
-      console.log("called city change");
-
-      dispatch(updateCityChosen(val));
-    },
-    [dispatch]
+  },[dispatch] //dependicies array render each times after state is changed
   );
 
-  const filterSpeciality = useCallback(
-    (val) => {
-      dispatch(updateSpecialityChosen(val));
-    },
-    [dispatch]
+  const filterCity = useCallback((val)=>{
+    dispatch(updateCityChosen(val));
+  }
+  ,[dispatch]
   );
 
-  const filterHospital = useCallback(
-    (val) => {
-      dispatch(updateHospitalChosen(val));
-    },
-    [dispatch]
+  const filterHospital = useCallback((val)=>{
+    dispatch(updateHospitalChosen(val));
+  }
+  ,[dispatch]
   );
-
-  const updateSort = (val) => {
-    dispatch(updateDoctorsSort(val));
-  };
-
-  const updateOrder = (val) => {
-    dispatch(updateDoctorsOrder(val));
-  };
-
+  
   const doctorFilterOptions = [
     {
-      id: 4,
+      id:1,
+      options: filterCityOptions,
       icon: <FaCity />,
-      categoryTitle: "City",
-      categoryValue: cityChosen,
-      categoryValues: filterCityOptions,
-      filterFn: filterCity,
-      filterType: "select one",
       categoryType: "city",
+      categoryValue: cityChosen,
+      
+
     },
+
     {
-      id: 5,
-      icon: <FaUserDoctor />,
-      categoryTitle: "Speciality",
-      categoryValue: specialityChosen,
-      categoryValues: filterSpecialityOptions,
-      filterFn: filterSpeciality,
-      filterType: "select one",
-      categoryType: "speciality",
-    },
-    {
-      id: 6,
-      icon: <FaHospitalSymbol />,
-      categoryTitle: "Hospital",
-      categoryValue: hospitalChosen,
-      categoryValues: filterHospitalOptions,
-      filterFn: filterHospital,
-      filterType: "select one",
+      id:2,
+      options: filterHospitalOptions,
+      icon: <FaHospitalSymbol/>,
       categoryType: "hospital",
+      categoryValue: hospitalChosen,
+      
+
     },
+    {
+      id:3,
+      options: filterSpecialityOptions,
+      icon: <FaUserDoctor/>,
+      categoryType: "doctor",
+      categoryValue: specialityChosen,
+      
+
+    },
+
   ];
 
-  const updateFilterDoctorOptions = useCallback(() => {
-    let duplicateFilterDoctorOptions = { ...filterDoctorOptions };
-    let duplicateFilteredDoctors = [...doctors_data];
 
-    if (cityChosen && cityChosen !== "") {
-      duplicateFilterDoctorOptions.city = cityChosen;
-      duplicateFilteredDoctors = duplicateFilteredDoctors.filter(
-        (doctor) => doctor.location.toLowerCase() == cityChosen.toLowerCase()
-      );
-    } else {
-      delete duplicateFilterDoctorOptions.city;
+  const updateFilteredDoctorsOptions = useCallback(() => {
+    let duplicateFilteredDoctors = [...doctors_data]; // they point different memory address/location this is correct way because it doesnt affect the filtereddoctors
+    // let duplicateFilteredDoctors = filteredDoctors; // this point same memory address/location 
+
+    if( cityChosen && cityChosen !== ""){
+      duplicateFilteredDoctors = duplicateFilteredDoctors.filter((doctor) => 
+      doctor.location.toLowerCase() === cityChosen.toLowerCase());
     }
 
-    if (specialityChosen && specialityChosen !== "") {
-      duplicateFilterDoctorOptions.speciality = specialityChosen;
-      duplicateFilteredDoctors = duplicateFilteredDoctors.filter(
-        (doctor) =>
-          doctor.speciality.toLowerCase() == specialityChosen.toLowerCase()
-      );
-    } else {
-      delete duplicateFilterDoctorOptions.speciality;
-    }
+    if( specialityChosen && specialityChosen !== ""){
+      duplicateFilteredDoctors = duplicateFilteredDoctors.filter((doctor) => 
+      doctor.speciality.toLowerCase() === specialityChosen.toLowerCase());
+    };
 
-    if (hospitalChosen && hospitalChosen !== "") {
-      duplicateFilterDoctorOptions.hospital = hospitalChosen;
-    } else {
-      delete duplicateFilterDoctorOptions.hospital;
-    }
-
-    if (sort && sort !== "") {
-      duplicateFilterDoctorOptions.sortBy = sort.toLowerCase();
-    } else {
-      delete duplicateFilterDoctorOptions.sortBy;
-    }
-
-    if (order && order !== "") {
-      duplicateFilterDoctorOptions.order =
-        order === "A-Z" ? "asc" : order === "Z-A" ? "desc" : "asc";
-    } else {
-      delete duplicateFilterDoctorOptions.order;
+    if( hospitalChosen &&  hospitalChosen !== ""){
+      duplicateFilteredDoctors = duplicateFilteredDoctors.filter((doctor) => 
+      doctor.hospital.toLowerCase() === hospitalChosen.toLowerCase());
     }
 
     dispatch(updateFilteredDoctors(duplicateFilteredDoctors));
-    setFilterDoctorOptions(duplicateFilterDoctorOptions);
-  }, [
-    filterDoctorOptions,
-    cityChosen,
-    specialityChosen,
-    hospitalChosen,
-    sort,
-    order,
-    dispatch,
-  ]);
+
+    
+  } , [filteredDoctors, cityChosen, specialityChosen, hospitalChosen, dispatch]);
+
+  useEffect(() =>{
+    updateFilteredDoctorsOptions();
+  }, [cityChosen, specialityChosen, hospitalChosen, dispatch]);
+
 
   useEffect(() => {
-    updateFilterDoctorOptions();
-  }, []);
+    console.log("cityChosen", cityChosen)
+  },[cityChosen]);
 
-  useEffect(() => {
-    updateFilterDoctorOptions();
-    console.log("city chosen: ", cityChosen);
-    console.log("speciality: ", specialityChosen);
-  }, [cityChosen, specialityChosen, hospitalChosen, sort, order]);
+  
 
-  if (!filteredDoctors) {
-    return <p>Loading doctors...</p>;
-  }
-
+if (!filteredDoctors) {
+  return <p>Loading doctors...</p>;
+}
   return (
     <div className="flex flex-col gap-4 lg:gap-5">
       <div className=" flex flex-col gap-3 md:gap-5 lg:flex-row lg:items-center">
@@ -188,16 +139,16 @@ export default function DoctorFilter({
               //   filterType,
               icon,
               categoryValue,
-              categoryValues,
-              filterFn,
+              options,
+          
               categoryType,
             } = PageFilter;
 
             return (
               <FilterSelect
-                options={categoryValues}
+                options={options}
                 categoryValue={categoryValue}
-                updateCategoryValue={filterFn}
+                // updateCategoryValue={filterFn}
                 icon={icon}
                 key={id}
                 categoryType={categoryType}

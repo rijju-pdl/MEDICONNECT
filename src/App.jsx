@@ -15,7 +15,7 @@ import AdminDashBoard from "./pages/admin/AdminDashBoard";
 import AdminDoctors from "./pages/admin/AdminDoctors";
 import AdminHospitals from "./pages/admin/AdminHospitals";
 import GlobalContextProvider from "./context/GlobalContextProvider";
-import DoctorContextProvider from "./context/DoctorContext";
+
 function App() {
   const [count, setCount] = useState(0);
 

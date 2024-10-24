@@ -19,11 +19,28 @@ export default function Doctor() {
 */
 
 import React from 'react'
+import DoctorFilter from '../components/doctors/DoctorFilter'
+import FilteredDoctorsList from '../components/doctors/FilteredDoctorsList'
+
 
 export default function Doctor() {
   return (
-    <div>
-      
-    </div>
+    <div className="flex flex-col gap-4 md:gap-6 section_vp padding">
+    <DoctorFilter
+      //currentlyViewedDoctorsLastIndex={currentlyViewedPageLastIndex}
+     // currentlyViewedDoctorsStartIndex={currentlyViewedPageStartIndex}
+    />
+
+    <FilteredDoctorsList
+      // totalDoctors={totalDoctors}
+      // totalPage={totalPage}
+      // page={currentlyViewedPageNum}
+      // numOfDoctorsPerPage={numOfDoctorsPerPage}
+      // onPageChange={changeCurrentlyViewedPageNum}
+      // currentlyViewedDoctorsLastIndex={currentlyViewedPageLastIndex}
+      // currentlyViewedDoctorsStartIndex={currentlyViewedPageStartIndex}
+  
+    />
+  </div>
   )
 }
