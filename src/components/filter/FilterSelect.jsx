@@ -4,16 +4,16 @@ import { Fragment, useCallback, useEffect, useState } from "react";
 import { Listbox, Transition } from "@headlessui/react";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  updateCityChosen,
+  updateCityChosenDoctor,
   updateHospitalChosen,
   updateSpecialityChosen,
-} from "../../redux/actions/doctorFilterActions";
+} from '../../stores/doctorSlice';
 import { FaCaretDown, FaCheck } from "react-icons/fa6";
 
-const FilterSelect = ({ options, icon, className, categoryType, }) => {
+const FilterSelect = ({ options, icon, className, categoryType,filterFn }) => {
   const dispatch = useDispatch();
   const { cityChosen, hospitalChosen, specialityChosen } = useSelector(
-    (state) => state.doctorFilter
+    (state) => state.doctors
   );
 
   // Determine the selected category based on the categoryType prop
@@ -48,11 +48,11 @@ const FilterSelect = ({ options, icon, className, categoryType, }) => {
 
   const updateCategoryValueOnOptionSelection = useCallback(() => {
     if (selected && selected.pos && selected.pos === "first") {
-      if (categoryType === "city") dispatch(updateCityChosen(""));
+      if (categoryType === "city") dispatch(updateCityChosenDoctor(""));
       if (categoryType === "hospital") dispatch(updateHospitalChosen(""));
       if (categoryType === "speciality") dispatch(updateSpecialityChosen(""));
     } else if (selected && !selected.pos) {
-      if (categoryType === "city") dispatch(updateCityChosen(selected.value));
+      if (categoryType === "city") dispatch(updateCityChosenDoctor(selected.value));
       if (categoryType === "hospital")
         dispatch(updateHospitalChosen(selected.value));
       if (categoryType === "speciality")

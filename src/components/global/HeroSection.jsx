@@ -5,6 +5,7 @@ import { FaHospitalUser, } from "react-icons/fa";
 import { GiHospitalCross } from "react-icons/gi";
 import { TbUserSearch } from "react-icons/tb";
 import { FaUserDoctor } from "react-icons/fa6";
+import SearchProviders from '../home/SearchProviders';
 
 export default function HeroSection() {
   return (
@@ -40,6 +41,7 @@ export default function HeroSection() {
 
         </div>
 
+<SearchProviders/>
     </section>
   )
 }
