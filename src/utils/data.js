@@ -2,7 +2,7 @@ export const doctors_data = [
   {
     id: 1,
     name: "Dr. John Smith",
-    image: "/images/doctor1.jpg",
+    image: "/images/doctor1.jpeg",
     speciality: "Cardiology",
     experience: "10 years",
     location: "Biratnagar",
@@ -18,7 +18,7 @@ export const doctors_data = [
   {
     id: 2,
     name: "Dr. Emily Clark",
-    image: "/images/doctor1.jpg",
+    image: "/images/doctor2.jpeg",
     speciality: "Dermatology",
     experience: "8 years",
     location: "Kathmandu",
@@ -34,7 +34,7 @@ export const doctors_data = [
   {
     id: 3,
     name: "Dr. Michael Johnson",
-    image: "/images/doctor1.jpg",
+    image: "/images/doctor1.jpeg",
     speciality: "Neurology",
     experience: "12 years",
     location: "Lalitpur",
@@ -50,7 +50,7 @@ export const doctors_data = [
   {
     id: 4,
     name: "Dr. Sarah Lee",
-    image: "/images/doctor1.jpg",
+    image: "/images/doctor3.jpeg",
     speciality: "Pediatrics",
     experience: "6 years",
     location: "Butwal",
@@ -66,7 +66,7 @@ export const doctors_data = [
   {
     id: 5,
     name: "Dr. David Martinez",
-    image: "/images/doctor1.jpg",
+    image: "/images/doctor1.jpeg",
     speciality: "Orthopedics",
     experience: "15 years",
     location: "Hetauda",

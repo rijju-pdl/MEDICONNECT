@@ -27,3 +27,4 @@ export const { updateCitySearched, updateProvider, updateSpecialitySearched } =
   providersSearchSlice.actions;
 
 export default providersSearchSlice.reducer;
+

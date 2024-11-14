@@ -32,7 +32,7 @@
           <div className="flex flex-wrap gap-4 lg:gap-5">
             {filteredDoctors
               .slice(
-                currentlyViewedDoctorsStartIndex,
+                currentlyViewedDoctorsStartIndex, 
                 currentlyViewedDoctorsLastIndex
               )
               .map((doctor) => (
