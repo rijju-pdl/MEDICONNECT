@@ -4,7 +4,7 @@ const doctorSchema = new mongoose.Schema(
   {
     user_id: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
+      ref: "User", //reference to the User model to link the doctor to the user
       required: true,
     },
     specialization: {
@@ -25,6 +25,8 @@ const doctorSchema = new mongoose.Schema(
     profile: {
       type: String,
     },
+
+  
   },
   { timestamps: true }
 );

@@ -2,6 +2,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv'; //for loading environment variables from a .env file into process.env
 import userRoutes from './routes/users/index.js';
+import doctorRoutes from './routes/doctors/index.js';
 
 
 const app = express();
@@ -16,6 +17,7 @@ app.use(express.json());
 //define routes
 
 app.use('/api/users', userRoutes);
+app.use('/api/doctors', doctorRoutes);
 
 // Connect to MongoDB
 const connectDB = async () => {
